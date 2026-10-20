@@ -143,8 +143,10 @@ p { margin: 0 0 1.1em; }
 /* ---------- header ---------- */
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 60;
   height: var(--header-h);
   display: flex;
@@ -1074,10 +1076,62 @@ p { margin: 0 0 1.1em; }
     transition-duration: .001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  /* never let an AOS element sit hidden when motion is off */
+  [data-aos] { opacity: 1 !important; transform: none !important; }
 }
 
 @media print {
+  [data-aos] { opacity: 1 !important; transform: none !important; }
   .site-header, .order-bar, .drawer, .scrim, .site-footer, .counter__actions { display: none !important; }
   .counter { position: static; opacity: 1; pointer-events: auto; }
   body { background: #fff; }
+}
+
+/* ==========================================================================
+   Responsive refinements
+   The layout is fluid throughout; these tidy up the extremes — very small
+   phones, short landscape screens, touch targets and very wide monitors.
+   ========================================================================== */
+
+/* Small phones: tighten the gutter and keep the header controls from crowding.
+   Full-width primary actions read better than two half-width buttons here. */
+@media (max-width: 400px) {
+  :root { --gutter: 1.1rem; }
+
+  .order-pill { padding: .45rem .85rem; font-size: .8rem; }
+  .brand { font-size: 1.1rem; letter-spacing: .1em; }
+
+  .hero__actions { gap: .6rem; }
+  .hero__actions .btn { flex: 1 1 100%; }
+
+  .btn { padding: .8rem 1.3rem; }
+  .btn--lg { padding: .95rem 1.5rem; }
+
+  .counter__actions { flex-wrap: wrap; }
+}
+
+/* Keep the sticky order bar clear of the phone's home indicator. */
+@media (max-width: 720px) {
+  .order-bar { bottom: calc(1rem + env(safe-area-inset-bottom)); }
+}
+
+/* Short landscape phones: the full-height hero/film would push everything off
+   the screen, so cap them to the viewport and let content breathe. */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero--editorial.hero--film { min-height: auto; }
+  .film__pin { min-height: 0; }
+  .drawer { width: min(440px, 92vw); }
+}
+
+/* Comfortable minimum tap targets on touch devices. */
+@media (hover: none) and (pointer: coarse) {
+  .add { width: 40px; height: 40px; }
+  .nav-toggle { padding: .65rem; }
+  .icon-btn { padding: .55rem; }
+}
+
+/* Very wide monitors: let the reading column grow a little rather than
+   stranding the content in the middle of a huge screen. */
+@media (min-width: 1700px) {
+  :root { --maxw: 1320px; }
 }

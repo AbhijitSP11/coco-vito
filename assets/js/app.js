@@ -135,6 +135,7 @@
       group.items.forEach(function (item) {
         var row = document.createElement('article');
         row.className = 'item';
+        row.setAttribute('data-aos', 'fade-up');
         row.dataset.id = item.id;
         // a real 3D render if the item has one, otherwise the drawn miniature
         var art = item.image
@@ -182,7 +183,8 @@
       if (!picks.length) picks = group.items.slice(0, 3);
 
       var card = document.createElement('a');
-      card.className = 'teaser__card reveal';
+      card.className = 'teaser__card';
+      card.setAttribute('data-aos', 'fade-up');
       card.href = 'menu.html#' + group.id;
       card.innerHTML =
         '<h3>' + group.name + '</h3>' +
@@ -412,7 +414,8 @@
     data.forEach(function (d, i) {
       var entry = CATALOG[d.itemId];
       var card = document.createElement('article');
-      card.className = 'sig reveal';
+      card.className = 'sig';
+      card.setAttribute('data-aos', 'fade-up');
       card.style.setProperty('--d1', d.tint[0]);
       card.style.setProperty('--d2', d.tint[1]);
       card.style.setProperty('--d3', d.tint[2]);
@@ -513,7 +516,8 @@
     items.forEach(function (entry) {
       var it = entry.item;
       var card = document.createElement('article');
-      card.className = 'pl reveal';
+      card.className = 'pl';
+      card.setAttribute('data-aos', 'fade-up');
       card.innerHTML =
         '<div class="pl__media">' +
           '<img src="' + it.image + '" alt="' + it.name + '" loading="lazy" decoding="async">' +
@@ -554,7 +558,8 @@
 
     data.forEach(function (r) {
       var card = document.createElement('article');
-      card.className = 'ig reveal';
+      card.className = 'ig';
+      card.setAttribute('data-aos', 'fade-up');
       card.innerHTML =
         '<header class="ig__head">' +
           '<span class="ig__avatar">' +
@@ -773,21 +778,16 @@
   }
 
   /* --------------------------------------------------------- intro film
-     A full-screen matcha clip on arrival. Shown once per browser session —
-     coming back from the menu page should not replay it — and skipped
-     entirely for anyone who asked for reduced motion. */
+     A full-screen matcha clip on arrival. Plays on every page load, and is
+     skipped entirely for anyone who asked for reduced motion. */
 
   function wireIntro() {
     var intro = $('#intro');
     if (!intro) return;
 
-    var KEY = 'cocovito.intro.seen';
-    var seen = false;
-    try { seen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
-
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (seen || reduce) { intro.remove(); return; }
+    if (reduce) { intro.remove(); return; }
 
     var video = $('video', intro);
     var bar = $('[data-intro-bar]', intro);
@@ -798,7 +798,6 @@
       if (done) return;
       done = true;
       clearTimeout(timer);
-      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
       intro.classList.add('is-leaving');
       document.body.classList.remove('is-locked');
       setTimeout(function () { intro.remove(); }, 900);
@@ -883,7 +882,29 @@
     });
   }
 
+  /* Scroll-reveal animations are driven by AOS (Animate On Scroll), loaded
+     from a CDN. Called after all dynamic content is built, so generated cards
+     and menu rows are already in the DOM and get picked up. */
   function wireReveal() {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (window.AOS && typeof window.AOS.init === 'function') {
+      window.AOS.init({
+        duration: 650,
+        easing: 'ease-out-cubic',
+        offset: 80,
+        once: true,
+        disable: function () { return reduce; }
+      });
+      // layout shifts as videos, images and the webfont settle, so recompute
+      // trigger positions once everything has loaded
+      window.addEventListener('load', function () { window.AOS.refresh(); });
+    } else {
+      // CDN blocked or failed: drop the hooks so nothing is stuck hidden
+      $$('[data-aos]').forEach(function (el) { el.removeAttribute('data-aos'); });
+    }
+
+    // fallback for any element still using the hand-rolled reveal
     var targets = $$('.reveal');
     if (!targets.length) return;
     if (!('IntersectionObserver' in window)) {

@@ -787,7 +787,6 @@ body { font-size: 17px; line-height: 1.6; }
 /* A transparent bar needs something behind it, so the dark hero starts at the
    very top of the page and runs underneath the header. */
 .page-hero {
-  margin-top: calc(var(--header-h) * -1);
   padding-top: calc(var(--header-h) + clamp(4rem, 9vw, 7rem));
 }
 
@@ -960,8 +959,8 @@ body[data-header="light"] .site-header:not(.is-stuck) .order-pill.has-items {
   color: var(--deep);
   min-height: auto;
   display: block;
-  /* runs under the transparent header instead of starting below it */
-  margin-top: calc(var(--header-h) * -1);
+  /* a fixed header overlays the top of the hero; the padding keeps the
+     content clear of it */
   padding-block: calc(var(--header-h) + clamp(.9rem, 2vw, 1.6rem)) clamp(2.5rem, 6vw, 5rem);
 }
 .hero__top {

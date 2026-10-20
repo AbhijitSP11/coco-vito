@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=24">
-<link rel="stylesheet" href="assets/css/editorial.css?v=24">
+<link rel="stylesheet" href="assets/css/styles.css?v=26">
+<link rel="stylesheet" href="assets/css/editorial.css?v=26">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 </head>
 <body>
 
@@ -66,7 +67,7 @@
         <p class="label">Whisked to order</p>
       </div>
 
-      <div class="hero__title">
+      <div class="hero__title" data-aos="fade-up">
         <h1 class="display display--xl">
           Made<span class="hero__inline-plate">
             <video src="assets/video/dessert.mp4" autoplay muted loop playsinline preload="metadata"></video>
@@ -75,7 +76,7 @@
       </div>
 
       <div class="hero__foot">
-        <div class="hero__foot-copy">
+        <div class="hero__foot-copy" data-aos="fade-up" data-aos-delay="100">
           <p class="num">01</p>
           <hr class="rule" style="margin:.9rem 0 1.2rem">
           <p class="lede">
@@ -89,7 +90,7 @@
           </div>
         </div>
 
-        <div class="hero__foot-orb">
+        <div class="hero__foot-orb" data-aos="fade-left" data-aos-delay="200">
           <a class="orb" href="#builder">Explore<br>Dishes</a>
           <p class="label" style="text-align:center">Open today<br>8am – 11pm</p>
         </div>
@@ -101,7 +102,7 @@
   <section class="section section--paper" id="drinks">
     <div class="wrap">
 
-      <div class="sig-head reveal">
+      <div class="sig-head" data-aos="fade-up">
         <div>
           <p class="num">02</p>
           <h2 class="display display--lg" style="margin:.7rem 0 0">Served<br>On A Plate</h2>
@@ -115,7 +116,7 @@
 
       <div class="plate-grid" id="plateGrid"></div>
 
-      <div class="drinks-foot reveal">
+      <div class="drinks-foot" data-aos="fade-up">
         <ul class="index-list">
           <li><a href="menu.html#matcha">Matcha, done well <span class="arrow">&#8599;</span></a></li>
           <li><a href="menu.html#gelato">Gelato flavours and creations <span class="arrow">&#8599;</span></a></li>
@@ -156,7 +157,7 @@
   <!-- ===================================================== signatures -->
   <section class="section section--paper">
     <div class="wrap">
-      <div class="sig-head reveal">
+      <div class="sig-head" data-aos="fade-up">
         <div>
           <p class="num">03</p>
           <h2 class="display display--lg" style="margin:.7rem 0 0">Signatures</h2>
@@ -186,7 +187,7 @@
   <!-- ================================================ gelato creations -->
   <section class="section" id="builder">
     <div class="wrap">
-      <div class="section-head reveal" style="text-align:center">
+      <div class="section-head" data-aos="fade-up" style="text-align:center">
         <p class="num">04</p>
         <h2 class="display display--lg" style="margin:.8rem 0 1.2rem">Build Your Gelato</h2>
         <p class="lede" style="margin-inline:auto">
@@ -194,7 +195,7 @@
         </p>
       </div>
 
-      <div class="fries">
+      <div class="fries" data-aos="fade-up">
         <div class="fries__media">
           <video src="assets/video/dessert.mp4" autoplay muted loop playsinline preload="metadata"></video>
           <span class="fries__badge">Churned this morning</span>
@@ -256,7 +257,7 @@
   <!-- ========================================================= reviews -->
   <section class="section section--paper">
     <div class="wrap">
-      <div class="sig-head reveal">
+      <div class="sig-head" data-aos="fade-up">
         <div>
           <p class="num">05</p>
           <h2 class="display display--lg" style="margin:.7rem 0 0">From The Grid</h2>
@@ -291,7 +292,7 @@
   <!-- ==================================================== framed menu -->
   <section class="section">
     <div class="wrap wrap--wide">
-      <div class="frame reveal">
+      <div class="frame" data-aos="fade-up">
         <span class="frame__corner frame__corner--tl">Est. 2019</span>
         <span class="frame__corner frame__corner--tr">Bandra West</span>
         <span class="frame__corner frame__corner--br">All prices in &#8377;</span>
@@ -314,7 +315,7 @@
   <!-- ======================================================= closing -->
   <section class="section section--dark">
     <div class="wrap">
-      <div class="split">
+      <div class="split" data-aos="fade-up">
         <div class="split__media">
           <div class="plate-wrap plate-wrap--soft">
             <div class="plate">
@@ -425,9 +426,10 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="assets/js/icons.js?v=24"></script>
-<script src="assets/js/menu-data.js?v=24"></script>
-<script src="assets/js/app.js?v=24"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/js/icons.js?v=26"></script>
+<script src="assets/js/menu-data.js?v=26"></script>
+<script src="assets/js/app.js?v=26"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -1,0 +1,1273 @@
+/* ==========================================================================
+   Coco Vito — editorial layer
+   High-contrast Didone display, hairline rules, arc plates, scroll film.
+   Loads after styles.css and builds on its tokens.
+   ========================================================================== */
+
+h1, h2, h3, h4 { font-optical-sizing: auto; }
+
+/* ---------- display type ---------- */
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: .92;
+  letter-spacing: .005em;
+  margin: 0;
+}
+/* The hero column is 718px once the reel takes its share, so the ceiling is
+   what keeps "SERVED ALL DAY" on one line instead of orphaning a word. */
+.display--xl { font-size: clamp(2.6rem, 6.8vw, 4.9rem); }
+.display--lg { font-size: clamp(2rem, 5.6vw, 4.4rem); }
+.display--md { font-size: clamp(1.5rem, 3.2vw, 2.6rem); }
+.display em { font-style: italic; }
+
+.label {
+  font-family: var(--sans);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: 0;
+}
+.label--accent { color: var(--accent); }
+.label--light { color: color-mix(in srgb, var(--mist) 76%, transparent); }
+
+.num {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.rule {
+  height: 1px;
+  background: color-mix(in srgb, var(--olive) 22%, transparent);
+  border: 0;
+  margin: 0;
+}
+.section--dark .rule { background: color-mix(in srgb, var(--mist) 26%, transparent); }
+
+/* ---------- round explore button ---------- */
+
+.orb {
+  display: inline-grid;
+  place-items: center;
+  text-align: center;
+  width: clamp(92px, 11vw, 124px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--deep);
+  color: var(--linen);
+  font-family: var(--sans);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  padding: .5rem;
+  transition: transform .4s var(--ease), background .4s var(--ease);
+}
+.orb:hover { transform: scale(1.07); background: var(--accent); }
+
+/* ---------- circular plate with an arc ring behind it ---------- */
+
+.plate-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+}
+.plate-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -9%;
+  border-radius: 50%;
+  border: clamp(10px, 1.8vw, 17px) solid var(--accent);
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  z-index: 0;
+}
+.plate-wrap--right::before { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
+.plate-wrap--soft::before { border-color: var(--accent-soft); }
+
+.plate {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--deep-2);
+}
+.plate video, .plate img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- scroll-scrubbed video ---------- */
+
+.film { position: relative; }
+
+.film__pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--deep);
+  display: grid;
+  /* copy sits low, inside the only part of the frame that is darkened */
+  align-items: end;
+  justify-items: center;
+  padding-bottom: clamp(3.5rem, 9vh, 6rem);
+}
+.film__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.film__pin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* bottom only, and neutral: the top two thirds of the clip are untouched */
+  background: linear-gradient(to bottom,
+    transparent 0%, rgba(0,0,0,.08) 44%, rgba(0,0,0,.72) 86%, rgba(0,0,0,.84) 100%);
+}
+.film__copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  color: var(--linen);
+  text-align: center;
+}
+.film__copy .lede { margin-inline: auto; color: var(--mist); }
+
+.film__steps {
+  display: flex;
+  justify-content: center;
+  gap: clamp(.8rem, 3vw, 2.5rem);
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  flex-wrap: wrap;
+}
+.film__step {
+  font-family: var(--sans);
+  font-size: .64rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--mist) 42%, transparent);
+  padding-top: .9rem;
+  border-top: 1px solid color-mix(in srgb, var(--mist) 22%, transparent);
+  min-width: 86px;
+  transition: color .45s var(--ease), border-color .45s var(--ease);
+}
+.film__step.is-on { color: var(--accent-soft); border-color: var(--accent-soft); }
+
+.film__progress {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 1.8rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--mist) 20%, transparent);
+  z-index: 2;
+}
+.film__progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent-soft);
+}
+
+/* ==========================================================================
+   Signatures rail
+   Replaces the 3D carousel. Portrait clips in a row, captions UNDER the video
+   rather than on top of it — so nothing has to be darkened to stay readable.
+   ========================================================================== */
+
+.sig-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.sig-nav { display: flex; gap: .7rem; }
+.sig-nav .round-btn { color: var(--olive); }
+.sig-nav .round-btn:hover { background: var(--deep); color: var(--linen); border-color: var(--deep); }
+.sig-nav .round-btn[disabled] { opacity: .3; pointer-events: none; }
+
+.sig-rail {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: .25rem var(--gutter) 1.5rem;
+  margin-inline: calc(var(--gutter) * -1);
+}
+.sig-rail::-webkit-scrollbar { display: none; }
+
+.sig {
+  flex: 0 0 clamp(248px, 27vw, 340px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.sig__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--deep-2);
+  margin-bottom: 1.2rem;
+}
+.sig__media video,
+.sig__media .sig__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sig__fallback {
+  background:
+    radial-gradient(120% 90% at 30% 20%, var(--d2, #7f9a4e) 0%, transparent 60%),
+    linear-gradient(160deg, var(--d1, #2c3a1e), var(--d3, #131a0c));
+}
+.sig__index {
+  position: absolute;
+  z-index: 2;
+  top: .9rem;
+  left: .9rem;
+  font-family: var(--display);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--deep);
+  background: var(--paper);
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.sig__kicker { margin-bottom: .5rem; }
+.sig__name {
+  font-family: var(--display);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  margin: 0 0 .5rem;
+}
+.sig__note {
+  font-size: .92rem;
+  color: var(--sage);
+  margin: 0 0 1.1rem;
+  flex: 1;
+}
+.sig__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: .9rem;
+  border-top: 1px solid color-mix(in srgb, var(--olive) 18%, transparent);
+}
+.sig__price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.sig__add {
+  background: none;
+  border: 0;
+  padding: .2rem 0;
+  font-family: var(--sans);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  transition: gap .25s var(--ease);
+}
+.sig__add:hover { gap: .8rem; }
+.sig__add .arrow { font-size: .8rem; }
+
+.sig-hint {
+  margin: 0;
+  text-align: center;
+  color: var(--sage);
+}
+
+@media (max-width: 560px) {
+  .sig { flex: 0 0 78%; }
+  .sig-nav { display: none; }
+}
+
+/* ==========================================================================
+   Plated drinks
+   The renders carry their own warm backdrop, so each one sits in its own
+   card rather than being keyed out — cutting them would leave halos around
+   the white plates and eat the contact shadows.
+   ========================================================================== */
+
+.plate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.pl {
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--olive) 14%, transparent);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease),
+              border-color .35s var(--ease);
+}
+.pl:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: 0 26px 48px -30px rgba(19,26,12,.45);
+}
+
+.pl__media {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #EAE3DA;          /* matches the backdrop baked into the render */
+}
+.pl__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s var(--ease);
+}
+.pl:hover .pl__media img { transform: scale(1.04); }
+
+.pl__body {
+  padding: 1.2rem 1.3rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.pl__kicker { margin-bottom: .5rem; }
+.pl__name {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  margin: 0 0 .45rem;
+}
+.pl__note {
+  font-size: .9rem;
+  color: var(--sage);
+  margin: 0 0 1.1rem;
+  flex: 1;
+}
+/* what goes in — a list, not a control */
+.pl__ing {
+  list-style: none;
+  margin: 0;
+  padding: .9rem 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--olive) 16%, transparent);
+  display: grid;
+  gap: .4rem;
+}
+.pl__ing li {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  font-size: .86rem;
+  color: var(--olive);
+}
+.pl__ing li::before {
+  content: "";
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.drinks-foot {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+@media (max-width: 680px) {
+  .drinks-foot { grid-template-columns: 1fr; justify-items: center; }
+  .drinks-foot .index-list { width: 100%; }
+}
+
+/* one per row on a phone — three cards with ingredient lists do not want
+   to be squeezed into two columns */
+@media (max-width: 680px) {
+  .plate-grid { grid-template-columns: 1fr; }
+  .pl { display: grid; grid-template-columns: 38% 1fr; align-items: stretch; }
+  .pl__media { aspect-ratio: auto; height: 100%; }
+  .pl__body { padding: 1rem 1.1rem; }
+  .pl__name { font-size: 1.1rem; }
+}
+@media (max-width: 420px) {
+  .pl { grid-template-columns: 1fr; }
+  .pl__media { aspect-ratio: 1; }
+}
+
+/* ==========================================================================
+   Instagram reviews
+   Post-shaped cards, in the site's own type and palette. Deliberately not a
+   copy of Instagram's branding — no wordmark, no gradient avatar ring.
+   ========================================================================== */
+
+.ig-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.ig {
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--olive) 16%, transparent);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.ig:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 44px -28px rgba(19,26,12,.4);
+}
+
+.ig__head {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .8rem .9rem;
+}
+.ig__avatar {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  padding: 3px;
+  background: var(--linen);
+  border: 1.5px solid var(--accent);
+}
+.ig__who { min-width: 0; flex: 1; }
+.ig__user {
+  margin: 0;
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ig__place {
+  margin: 0;
+  font-size: .76rem;
+  color: var(--sage);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ig__dots { color: var(--sage); letter-spacing: .1em; flex: none; }
+
+.ig__media {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--deep-2);
+}
+.ig__media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ig__actions {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: .8rem .9rem .4rem;
+  color: var(--deep);
+}
+.ig__actions svg { width: 22px; height: 22px; display: block; }
+.ig__actions .ig__save { margin-left: auto; }
+.ig__heart { color: var(--alert); }
+
+.ig__body { padding: 0 .9rem 1rem; }
+.ig__likes {
+  margin: 0 0 .4rem;
+  font-size: .88rem;
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.ig__caption {
+  margin: 0 0 .5rem;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.ig__caption b { font-weight: 600; }
+.ig__time {
+  margin: 0;
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+@media (max-width: 680px) {
+  .ig-rail {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 80%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+  .ig-rail::-webkit-scrollbar { display: none; }
+  .ig { scroll-snap-align: start; }
+}
+
+/* ---------- the big framed menu ---------- */
+
+.frame {
+  border: 1px solid color-mix(in srgb, var(--olive) 26%, transparent);
+  background: var(--paper);
+  padding: clamp(1.4rem, 4.5vw, 4.5rem);
+  position: relative;
+}
+.frame__head {
+  text-align: center;
+  padding-bottom: clamp(1.4rem, 3vw, 2.4rem);
+  margin-bottom: clamp(1.6rem, 3vw, 2.8rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--olive) 20%, transparent);
+}
+.frame__head .label { margin-bottom: .9rem; }
+.frame__head .lede { margin: 1.2rem auto 0; }
+.frame__corner {
+  position: absolute;
+  font-family: var(--sans);
+  font-size: .6rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+.frame__corner--tl { top: 1rem; left: 1.2rem; }
+.frame__corner--tr { top: 1rem; right: 1.2rem; }
+.frame__corner--br { bottom: 1rem; right: 1.2rem; }
+@media (max-width: 860px) { .frame__corner { display: none; } }
+
+/* ---------- fries builder ---------- */
+
+.fries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.fries__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--deep-2);
+}
+.fries__media video { width: 100%; height: 100%; object-fit: cover; }
+.fries__badge {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  background: color-mix(in srgb, var(--linen) 92%, transparent);
+  color: var(--deep);
+  font-family: var(--sans);
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: .45rem .8rem;
+}
+
+.picker { display: grid; gap: .6rem; margin: 1.8rem 0 0; padding: 0; border: 0; }
+.picker legend {
+  font-family: var(--sans);
+  font-size: .66rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--sage);
+  padding: 0 0 .9rem;
+}
+.option { position: relative; display: block; }
+.option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.option__box {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .25rem 1rem;
+  align-items: baseline;
+  padding: 1rem 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--olive) 20%, transparent);
+  cursor: pointer;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+}
+.option__box:hover { border-color: var(--accent); }
+.option input:focus-visible + .option__box { outline: 2px solid var(--accent); outline-offset: 2px; }
+.option input:checked + .option__box {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.option__name {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.option__price { font-family: var(--sans); font-weight: 600; font-variant-numeric: tabular-nums; }
+.option__note { grid-column: 1 / -1; font-size: .82rem; color: var(--sage); margin: 0; }
+
+.loadout { list-style: none; margin: 1.6rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.loadout li {
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--olive);
+  border: 1px solid color-mix(in srgb, var(--olive) 22%, transparent);
+  border-radius: 100px;
+  padding: .35rem .8rem;
+  transition: opacity .25s var(--ease);
+}
+.loadout li[data-on="false"] { opacity: .3; text-decoration: line-through; }
+
+.fries__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid color-mix(in srgb, var(--olive) 20%, transparent);
+}
+.fries__total {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-right: auto;
+}
+
+@media (max-width: 860px) {
+  .fries { grid-template-columns: 1fr; }
+  .fries__media { aspect-ratio: 16 / 10; }
+}
+
+/* ---------- editorial 12 column row ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+}
+.split__media { grid-column: span 4; }
+.split__body  { grid-column: span 5; }
+.split__aside { grid-column: span 3; display: grid; justify-items: center; gap: 1.2rem; }
+
+@media (max-width: 960px) {
+  .split__media { grid-column: span 5; }
+  .split__body  { grid-column: span 7; }
+  .split__aside { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .split__media, .split__body { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   One typeface, tuned
+   A serif doing UI work needs a little help: tracked-out caps for the small
+   labels, a weight bump on controls, and lining figures for every price.
+   ========================================================================== */
+
+body { font-size: 17px; line-height: 1.6; }
+
+.label,
+.eyebrow,
+.frame__corner,
+.film__step,
+.fries__badge,
+.hero__reel-tag,
+.tag,
+.menu-group__count,
+.field label,
+.totals__label,
+.counter__hint,
+.counter__total span,
+.site-footer h4 { font-weight: 600; }
+
+.btn,
+.order-pill,
+.chip,
+.option__price,
+.link-btn,
+.nav a {
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.btn { font-size: .98rem; }
+.nav a { font-size: .98rem; }
+
+.item__price,
+.line__total,
+.totals__value,
+.counter__amt,
+.counter__qty,
+.counter__total b,
+.fries__total,
+.option__price,
+.teaser__picks b,
+.order-bar__text b {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ==========================================================================
+   Header — transparent over the hero, a surface once you scroll
+   ========================================================================== */
+
+.nav a { font-size: .95rem; letter-spacing: .06em; }
+.nav a::after { height: 1px; opacity: .6; }
+
+/* the order button is a hairline until there is something in it */
+.order-pill {
+  background: transparent;
+  color: var(--deep);
+  border: 1px solid color-mix(in srgb, var(--olive) 30%, transparent);
+  padding: .5rem 1.1rem;
+  transition: background .25s var(--ease), color .25s var(--ease),
+              border-color .25s var(--ease);
+}
+.order-pill:hover {
+  background: var(--deep);
+  color: var(--linen);
+  border-color: var(--deep);
+}
+.order-pill.has-items {
+  background: var(--deep);
+  color: var(--linen);
+  border-color: var(--deep);
+}
+.order-pill.has-items:hover { background: var(--accent); border-color: var(--accent); }
+.order-pill__count { background: var(--accent); color: #fff; }
+
+/* A transparent bar needs something behind it, so the dark hero starts at the
+   very top of the page and runs underneath the header. */
+.page-hero {
+  margin-top: calc(var(--header-h) * -1);
+  padding-top: calc(var(--header-h) + clamp(4rem, 9vw, 7rem));
+}
+
+/* Pages whose hero is a dark video get light chrome until the bar sticks. */
+body[data-header="light"] .site-header:not(.is-stuck) .brand { color: var(--linen); }
+body[data-header="light"] .site-header:not(.is-stuck) .brand span { color: var(--accent-soft); }
+body[data-header="light"] .site-header:not(.is-stuck) .nav-toggle { color: var(--linen); }
+body[data-header="light"] .site-header:not(.is-stuck) .nav a {
+  color: color-mix(in srgb, var(--linen) 80%, transparent);
+}
+body[data-header="light"] .site-header:not(.is-stuck) .nav a:hover,
+body[data-header="light"] .site-header:not(.is-stuck) .nav a[aria-current="page"] {
+  color: var(--linen);
+}
+body[data-header="light"] .site-header:not(.is-stuck) .order-pill {
+  color: var(--linen);
+  border-color: color-mix(in srgb, var(--linen) 45%, transparent);
+}
+body[data-header="light"] .site-header:not(.is-stuck) .order-pill:hover,
+body[data-header="light"] .site-header:not(.is-stuck) .order-pill.has-items {
+  background: var(--linen);
+  color: var(--deep);
+  border-color: var(--linen);
+}
+
+/* the mobile panel still needs a surface of its own */
+@media (max-width: 720px) {
+  body[data-header="light"] .nav.is-open a { color: var(--olive); }
+  body[data-header="light"] .nav.is-open a[aria-current="page"] { color: var(--deep); }
+}
+
+/* ---------- wider container, for the menu ---------- */
+
+.wrap--wide { max-width: 1480px; }
+
+/* ---------- hero with the clip running behind it ---------- */
+
+/* both classes, so this beats the plain .hero--editorial rule further down */
+.hero--editorial.hero--film {
+  position: relative;
+  background: var(--deep);
+  color: var(--linen);
+  display: flex;
+  align-items: center;
+  min-height: min(94svh, 880px);
+  overflow: hidden;
+  padding-block: calc(var(--header-h) + clamp(1rem, 3vw, 2.2rem)) clamp(2rem, 5vw, 3.5rem);
+}
+.hero--film .wrap { position: relative; z-index: 2; width: 100%; }
+
+.hero__bg { position: absolute; inset: 0; overflow: hidden; }
+.hero__bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Neutral, and weighted to the bottom left where the words are — the footage
+   keeps its own colour. */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,.7) 0%, rgba(0,0,0,.44) 50%, rgba(0,0,0,.26) 100%),
+    linear-gradient(to top, rgba(0,0,0,.42) 0%, rgba(0,0,0,0) 58%);
+}
+
+.hero--film .hero__top { justify-content: space-between; }
+.hero--film .label { color: color-mix(in srgb, var(--linen) 78%, transparent); }
+.hero--film .num { color: var(--accent-soft); }
+.hero--film .rule { background: color-mix(in srgb, var(--linen) 28%, transparent); }
+.hero--film .lede { color: var(--mist); max-width: 46ch; }
+.hero--film .hero__title { text-align: left; }
+.hero--film .btn--ghost { color: var(--linen); border-color: color-mix(in srgb, var(--linen) 55%, transparent); }
+.hero--film .btn--ghost:hover { background: var(--linen); color: var(--deep); border-color: var(--linen); }
+.hero--film .orb { background: var(--linen); color: var(--deep); }
+.hero--film .orb:hover { background: var(--accent); color: var(--linen); }
+.hero--film .hero__inline-plate { box-shadow: 0 0 0 2px color-mix(in srgb, var(--linen) 45%, transparent); }
+
+@media (max-width: 680px) {
+  .hero--editorial.hero--film { min-height: min(92svh, 760px); }
+  .hero--film .hero__title { text-align: center; }
+}
+
+/* ---------- vertical reel beside the hero ---------- */
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(210px, 23vw, 330px);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: stretch;
+}
+
+.hero__reel {
+  position: relative;
+  overflow: hidden;
+  background: var(--deep-2);
+  /* a fixed portrait ratio, centred — stretching it to the row height made
+     it taller than the viewport whenever the headline wrapped */
+  align-self: center;
+  aspect-ratio: 9 / 16;
+  max-height: 78vh;
+  width: 100%;
+  margin-inline: auto;
+}
+.hero__reel video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__reel-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 2.5rem 1.1rem 1.1rem;
+  background: linear-gradient(to top, rgba(0,0,0,.82) 12%, rgba(0,0,0,.3) 60%, transparent);
+  color: var(--linen);
+}
+.hero__reel-cap .label { color: var(--accent-soft); margin-bottom: .4rem; }
+.hero__reel-cap p:last-child {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  line-height: 1.1;
+}
+.hero__reel-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  background: color-mix(in srgb, var(--linen) 92%, transparent);
+  color: var(--deep);
+  font-family: var(--sans);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: .4rem .7rem;
+}
+
+.hero__grid .hero__title { text-align: left; padding-top: 0; }
+
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__reel {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    max-width: 440px;
+    width: 100%;
+    margin-inline: auto;
+    margin-top: clamp(1.5rem, 5vw, 2.5rem);
+    /* the headline leads; the reel follows. Ordering the video first pushed
+       the whole hero below the fold on a phone. */
+  }
+  .hero__grid .hero__title { text-align: center; }
+}
+
+/* ---------- hero, restyled ---------- */
+
+.hero--editorial {
+  background: var(--linen);
+  color: var(--deep);
+  min-height: auto;
+  display: block;
+  /* runs under the transparent header instead of starting below it */
+  margin-top: calc(var(--header-h) * -1);
+  padding-block: calc(var(--header-h) + clamp(.9rem, 2vw, 1.6rem)) clamp(2.5rem, 6vw, 5rem);
+}
+.hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-bottom: clamp(.9rem, 2vw, 1.4rem);
+}
+.hero__top p { margin: 0; max-width: 26ch; }
+
+.hero__title {
+  position: relative;
+  text-align: center;
+  padding-block: clamp(.2rem, 1vw, .7rem);
+}
+/* the plate that sits inside the headline, as in the reference */
+.hero__inline-plate {
+  display: inline-block;
+  vertical-align: middle;
+  width: clamp(54px, 7.5vw, 112px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-inline: clamp(.1em, .4vw, .18em);
+  transform: translateY(-.06em);
+  background: var(--deep-2);
+}
+.hero__inline-plate video { width: 100%; height: 100%; object-fit: cover; }
+
+.hero__foot {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  margin-top: clamp(1.4rem, 3vw, 2.4rem);
+}
+.hero__foot-plate { grid-column: span 3; }
+.hero__foot-copy  { grid-column: span 8; }
+.hero__foot-orb   { grid-column: span 4; display: grid; justify-items: center; gap: 1rem; }
+
+@media (max-width: 960px) {
+  .hero__foot-plate { grid-column: span 5; }
+  .hero__foot-copy  { grid-column: 1 / -1; }
+  .hero__foot-orb   { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .hero__foot-plate, .hero__foot-copy { grid-column: 1 / -1; }
+  .hero__foot-plate { max-width: 220px; margin-inline: auto; }
+}
+
+/* ---------- category index (reference "our categories") ---------- */
+
+.index-list { list-style: none; margin: 0; padding: 0; }
+.index-list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--olive) 18%, transparent);
+  text-decoration: none;
+  font-size: .95rem;
+  transition: color .25s var(--ease), padding-left .25s var(--ease);
+}
+.index-list a:hover { color: var(--accent); padding-left: .4rem; }
+.index-list .arrow { font-size: .8rem; color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .film__pin { position: relative; height: auto; min-height: 0; aspect-ratio: 16 / 9; }
+}
+
+/* On a phone the xl headline is wider than the screen at its clamp floor,
+   so it breaks to an orphan word. Let it go smaller rather than wrap badly. */
+@media (max-width: 520px) {
+  .display--xl { font-size: clamp(1.95rem, 9.2vw, 2.6rem); }
+  .display--lg { font-size: clamp(1.7rem, 7.6vw, 2.4rem); }
+}
+
+/* ---------- carry the Didone caps through the older components ---------- */
+
+.page-hero h1 {
+  text-transform: uppercase;
+  font-size: clamp(2.3rem, 6.5vw, 5rem);
+  line-height: .95;
+  letter-spacing: .005em;
+}
+.section-head h2,
+.feature h2,
+.frame__head h2 { letter-spacing: .01em; }
+
+.menu-group__head h3,
+.teaser__card h3,
+.card h3 {
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.menu-group__head h3 { font-size: clamp(1.3rem, 2.6vw, 2rem); }
+
+.item__name { letter-spacing: .01em; }
+
+.counter__brand,
+.footer-brand,
+.brand { letter-spacing: .2em; }
+
+/* the frame holds the menu, so the groups inside need less outer air */
+.frame .menu-group:last-child { margin-bottom: 0; }
+
+/* ---------- the menu, scaled up ----------
+   The menu is the point of the site, so inside a frame it gets a bigger
+   column, bigger type and more room per row than the rest of the page. */
+
+.frame { padding: clamp(1.6rem, 5vw, 5.5rem); }
+.frame__head h2 { font-size: clamp(2.2rem, 6vw, 5rem); }
+
+.frame .menu-group { margin-bottom: clamp(3rem, 6vw, 5rem); }
+.frame .menu-group__head {
+  margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+  padding-bottom: 1.1rem;
+}
+.frame .menu-group__head h3 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); }
+.frame .menu-group__count { font-size: .78rem; }
+
+.frame .menu-grid {
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: .5rem clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.frame .item { padding: 1.35rem 0; gap: 1.1rem; }
+.frame .item__name { font-size: clamp(1.15rem, 1.6vw, 1.4rem); }
+.frame .item__note { font-size: .92rem; }
+.frame .item__price { font-size: 1.08rem; }
+.frame .item__right { gap: 1rem; }
+.frame .add { width: 40px; height: 40px; font-size: 1.25rem; }
+.frame .diet { width: 17px; height: 17px; margin-top: .5rem; }
+
+.frame .chip { font-size: .86rem; padding: .6rem 1.2rem; }
+
+/* the home page preview inside the frame */
+.frame .teaser { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
+.frame .teaser__card { padding: 1.9rem 1.8rem 1.6rem; }
+.frame .teaser__card h3 { font-size: 1.5rem; }
+.frame .teaser__picks li { font-size: .95rem; padding-bottom: .6rem; }
+
+@media (max-width: 980px) {
+  .frame .menu-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ---------- dish vectors ---------- */
+
+.ic { width: 100%; height: 100%; overflow: visible; display: block; }
+
+.item__icon {
+  width: 50px;
+  height: 50px;
+  flex: none;
+  margin-top: -.15rem;
+  transition: transform .3s var(--ease);
+}
+.item__icon img { width: 100%; height: 100%; object-fit: contain; }
+.item:hover .item__icon { transform: translateY(-2px) scale(1.05); }
+.frame .item__icon { width: 58px; height: 58px; }
+
+@media (max-width: 520px) {
+  .item__icon, .frame .item__icon { width: 42px; height: 42px; }
+}
+
+/* On a phone the three-column row squeezes the description into a ribbon.
+   Drop the price and the add button onto their own line instead. */
+@media (max-width: 560px) {
+  .menu-group__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .35rem;
+  }
+  .item { grid-template-columns: auto 1fr; row-gap: .7rem; }
+  /* the badge keeps its 34px even with nothing in it, which indents the row */
+  .item__qty:empty { display: none; }
+  .item__icon  { grid-row: 1; grid-column: 1; }
+  .item__body  { grid-row: 1; grid-column: 2; }
+  .item__right { grid-row: 2; grid-column: 2; justify-content: flex-start; }
+}
+
+/* Ten categories is too many chips to stack — let them scroll sideways. */
+@media (max-width: 720px) {
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+}
+
+/* ---------- intro film ---------- */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--ink);
+  display: grid;
+  /* the opener is a vertical film, so the wordmark sits under it rather than
+     across the middle of the shot */
+  align-items: end;
+  justify-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .9s var(--ease);
+}
+.intro.is-on { opacity: 1; pointer-events: auto; }
+.intro.is-leaving { opacity: 0; }
+
+.intro video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* 9:16 source: fill a portrait screen, letterbox a landscape one rather
+     than cropping the cup out of the middle */
+  object-fit: contain;
+}
+@media (max-aspect-ratio: 3/4) {
+  .intro video { object-fit: cover; }
+}
+.intro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* weighted to the bottom, where the wordmark sits — the café interior in
+     the closing frames is pale, so this has to reach up past the type */
+  background: linear-gradient(to top,
+    rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 14%, rgba(0,0,0,.28) 30%,
+    rgba(0,0,0,.08) 50%, rgba(0,0,0,0) 68%);
+}
+
+.intro__inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--linen);
+  padding-inline: var(--gutter);
+  padding-bottom: clamp(3.4rem, 9vh, 5.5rem);
+  /* carries the wordmark over the pale frames without tinting the footage */
+  text-shadow: 0 1px 2px rgba(0,0,0,.45), 0 2px 28px rgba(0,0,0,.55);
+}
+.intro__brand {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 8vw, 5rem);
+  text-transform: uppercase;
+  letter-spacing: .28em;
+  line-height: 1;
+  margin: 0 0 1.4rem;
+  text-indent: .28em;
+  animation: introUp 1.1s var(--ease) both;
+}
+.intro__tag {
+  margin: 0;
+  color: var(--linen);
+  animation: introUp 1.1s var(--ease) .18s both;
+}
+@keyframes introUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.intro__skip {
+  position: absolute;
+  z-index: 3;
+  right: var(--gutter);
+  top: 1.6rem;
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--mist) 38%, transparent);
+  color: var(--linen);
+  font-family: var(--sans);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: .6rem 1.2rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.intro__skip:hover { background: var(--linen); color: var(--deep); }
+
+.intro__bar {
+  position: absolute;
+  z-index: 3;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 1.2rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--mist) 20%, transparent);
+}
+.intro__bar span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent-soft);
+}
+
+@media (max-width: 560px) {
+  .intro__skip { right: var(--gutter); top: 1.1rem; font-size: .66rem; padding: .5rem 1rem; }
+}

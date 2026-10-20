@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Coco Vito</title>
+<meta name="description" content="Where to find Coco Vito, when we are open, and how to reach us about bookings, events and large orders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=24">
+<link rel="stylesheet" href="assets/css/editorial.css?v=24">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Coco<span>&nbsp;Vito</span></a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="order-pill" type="button" data-open-order>
+        My order
+        <span class="order-pill__count" data-order-count hidden>0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="page-hero__media">
+      <video src="assets/video/menu-film.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h1>Come in, or<br>drop us a line.</h1>
+      <p class="hero__sub" style="margin-top:1.5rem">
+        We do not take reservations for regular service — walk in and find a seat.
+        For anything larger, use the form.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="contact-grid">
+
+        <div class="reveal">
+          <div class="info-block">
+            <h3>Find us</h3>
+            <address>
+              Coco Vito<br>
+              Ground floor, 14 Chapel Lane<br>
+              Off Hill Road, Bandra West<br>
+              Mumbai 400050
+            </address>
+          </div>
+
+          <div class="info-block">
+            <h3>Talk to us</h3>
+            <p>
+              <a href="tel:+912266001400">+91 22 6600 1400</a><br>
+              <a href="mailto:hello@cocovito.cafe">hello@cocovito.cafe</a>
+            </p>
+          </div>
+
+          <div class="info-block">
+            <h3>Opening hours</h3>
+            <ul class="hours" id="hours">
+              <li data-days="1,2,3,4"><span>Monday – Thursday</span><b>8:00 – 23:00</b></li>
+              <li data-days="5,6"><span>Friday – Saturday</span><b>8:00 – 01:00</b></li>
+              <li data-days="0"><span>Sunday</span><b>9:00 – 23:00</b></li>
+            </ul>
+            <p style="font-size:.84rem;margin-top:.8rem;color:var(--sage)">
+              Kitchen runs from 11:00 until half an hour before close. Gelato until it runs out.
+            </p>
+          </div>
+
+          <div class="info-block">
+            <h3>Tasting counter</h3>
+            <p>
+              Thursday and Friday, 18:00 – 21:00. Walk in only, twelve seats.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="card">
+            <h3 style="margin-bottom:.4rem">Large orders &amp; events</h3>
+            <p style="font-size:.92rem;color:var(--sage);margin-bottom:1.6rem">
+              Office catering, gelato carts, private evenings in the back room. Tell us
+              roughly what you need and we will come back within a day.
+            </p>
+
+            <form class="form" id="contactForm" novalidate>
+              <div class="field">
+                <label for="cf-name">Your name</label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="cf-email">Email</label>
+                <input id="cf-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="cf-topic">What is it about</label>
+                <select id="cf-topic" name="topic">
+                  <option>Catering or a large order</option>
+                  <option>Booking the back room</option>
+                  <option>Gelato cart for an event</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cf-message">Details</label>
+                <textarea id="cf-message" name="message" placeholder="Date, rough numbers, anything we should know." required></textarea>
+              </div>
+              <button class="btn btn--accent btn--block btn--lg" type="submit">Send enquiry</button>
+              <p class="form__note" id="formNote">
+                This form is not connected to a mail service yet — hook it up to your provider,
+                or write to <a href="mailto:hello@cocovito.cafe" style="color:var(--accent)">hello@cocovito.cafe</a>.
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="wrap">
+      <div class="feature reveal">
+        <div class="feature__media">
+          <video src="assets/video/food.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+        <div>
+          <p class="eyebrow">Before you come</p>
+          <h2>Build your order on the way.</h2>
+          <p class="lede">
+            Pick what you want on the menu page, then show the screen at the counter.
+            It saves on your phone, so you can put it away on the walk over.
+          </p>
+          <div class="hero__actions" style="margin-top:2rem">
+            <a class="btn btn--accent" href="menu.html">Open the menu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Coco<span>&nbsp;Vito</span></div>
+        <p style="max-width:34ch;font-size:.9rem">
+          A café, a gelato bar and a kitchen that does not close in the afternoon.
+        </p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon – Thu · 8am – 11pm</li>
+          <li>Fri – Sat · 8am – 1am</li>
+          <li>Sunday · 9am – 11pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Coco Vito. All rights reserved.</span>
+      <span>Bandra West, Mumbai</span>
+    </div>
+  </div>
+</footer>
+
+<div class="order-bar" id="orderBar">
+  <span class="order-bar__text"><b data-order-items>0 items</b> · <b data-order-total>₹0</b></span>
+  <button class="btn btn--accent" type="button" data-open-order>View order</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Your order">
+  <div class="drawer__head">
+    <h2>Your order</h2>
+    <button class="icon-btn" id="drawerClose" type="button" data-close-order aria-label="Close order">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <div class="totals">
+      <span class="totals__label" data-order-items>0 items</span>
+      <span class="totals__value" data-order-total>₹0</span>
+    </div>
+    <button class="btn btn--accent btn--block btn--lg" type="button" data-show-counter>Show at counter</button>
+    <button class="link-btn" type="button" data-clear>Clear this order</button>
+  </div>
+</aside>
+
+<section class="counter" id="counter" aria-hidden="true" aria-label="Order for the counter">
+  <div class="counter__head">
+    <div class="counter__brand">Coco Vito</div>
+    <div class="counter__code" id="counterCode">—</div>
+    <p class="counter__hint" id="counterHint"></p>
+  </div>
+  <div class="counter__body" id="counterBody"></div>
+  <div class="counter__foot">
+    <div class="counter__total">
+      <span>Total to pay</span>
+      <b id="counterTotalValue">₹0</b>
+    </div>
+    <div class="counter__actions">
+      <button class="btn btn--ghost" type="button" id="counterCopy">Copy</button>
+      <button class="btn" type="button" id="counterClose" data-close-counter>Done</button>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/icons.js?v=24"></script>
+<script src="assets/js/menu-data.js?v=24"></script>
+<script src="assets/js/app.js?v=24"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var note = document.getElementById('formNote');
+    note.textContent = 'No mail service is connected yet, so nothing was sent. Write to hello@cocovito.cafe in the meantime.';
+    note.style.color = 'var(--alert)';
+  });
+</script>
+</body>
+</html>

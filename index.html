@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coco Vito — Café, Gelato Bar &amp; All Day Kitchen</title>
+<meta name="description" content="Coco Vito is a specialty café and gelato bar. Browse the menu, build your order on your phone, and show it at the counter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=24">
+<link rel="stylesheet" href="assets/css/editorial.css?v=24">
+</head>
+<body>
+
+<!-- ======================================================== intro film -->
+<div class="intro" id="intro" role="dialog" aria-label="Welcome to Coco Vito">
+  <video src="assets/video/opener.mp4" muted playsinline preload="auto"></video>
+  <div class="intro__inner">
+    <p class="intro__brand">Coco Vito</p>
+    <p class="label intro__tag">Espresso · Matcha · Gelato · Bandra West</p>
+  </div>
+  <button class="intro__skip" type="button" data-intro-skip>Skip intro</button>
+  <div class="intro__bar"><span data-intro-bar></span></div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Coco<span>&nbsp;Vito</span></a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="order-pill" type="button" data-open-order>
+        My order
+        <span class="order-pill__count" data-order-count hidden>0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================ hero -->
+  <section class="hero--editorial hero--film">
+    <div class="hero__bg">
+      <!-- the clip opens on an appliance panel and goes dark after ~6.3s;
+           this window is the pour -->
+      <video src="assets/video/matcha.mp4" autoplay muted loop playsinline
+             preload="auto" data-start="2.6" data-end="6.2"></video>
+    </div>
+
+    <div class="wrap">
+      <div class="hero__top">
+        <p class="label">Bandra West, Mumbai</p>
+        <p class="label">Whisked to order</p>
+      </div>
+
+      <div class="hero__title">
+        <h1 class="display display--xl">
+          Made<span class="hero__inline-plate">
+            <video src="assets/video/dessert.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </span>Slow,<br>Served All Day
+        </h1>
+      </div>
+
+      <div class="hero__foot">
+        <div class="hero__foot-copy">
+          <p class="num">01</p>
+          <hr class="rule" style="margin:.9rem 0 1.2rem">
+          <p class="lede">
+            Espresso pulled to order, gelato churned every morning, and a
+            kitchen that runs from eleven until close. Build your order here,
+            then show it at the counter.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="menu.html">See the menu</a>
+            <a class="btn btn--ghost" href="about.html">Our story</a>
+          </div>
+        </div>
+
+        <div class="hero__foot-orb">
+          <a class="orb" href="#builder">Explore<br>Dishes</a>
+          <p class="label" style="text-align:center">Open today<br>8am – 11pm</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================== plated drinks -->
+  <section class="section section--paper" id="drinks">
+    <div class="wrap">
+
+      <div class="sig-head reveal">
+        <div>
+          <p class="num">02</p>
+          <h2 class="display display--lg" style="margin:.7rem 0 0">Served<br>On A Plate</h2>
+        </div>
+        <p class="lede" style="max-width:38ch;margin:0">
+          Every drink comes out on bone china with whatever it was made from
+          sitting beside it — the hazelnuts, the cinnamon bark, the orange peel.
+          It is how we check the cup before it leaves the pass.
+        </p>
+      </div>
+
+      <div class="plate-grid" id="plateGrid"></div>
+
+      <div class="drinks-foot reveal">
+        <ul class="index-list">
+          <li><a href="menu.html#matcha">Matcha, done well <span class="arrow">&#8599;</span></a></li>
+          <li><a href="menu.html#gelato">Gelato flavours and creations <span class="arrow">&#8599;</span></a></li>
+          <li><a href="menu.html#sweet">Sweet treats, made fresh <span class="arrow">&#8599;</span></a></li>
+          <li><a href="menu.html#savoury">The savoury side, all day <span class="arrow">&#8599;</span></a></li>
+        </ul>
+        <a class="orb" href="menu.html">Explore<br>More</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================= scroll film 01 -->
+  <section class="film" data-film style="height:300vh">
+    <div class="film__pin">
+      <video class="film__video" src="assets/video/menu-film.mp4" muted playsinline preload="auto"></video>
+
+      <div class="film__copy">
+        <p class="label label--light">Scroll to watch</p>
+        <h2 class="display display--lg" style="margin:1.2rem 0 1.4rem">The pass,<br>end to end</h2>
+        <p class="lede" style="max-width:46ch">
+          Every plate we make, laid out on one table. Keep scrolling — the film
+          moves with you.
+        </p>
+
+        <div class="film__steps">
+          <div class="film__step" data-film-step>Drinks</div>
+          <div class="film__step" data-film-step>Gelato</div>
+          <div class="film__step" data-film-step>Desserts</div>
+          <div class="film__step" data-film-step>Kitchen</div>
+        </div>
+      </div>
+
+      <div class="film__progress"><span data-film-progress></span></div>
+    </div>
+  </section>
+
+  <!-- ===================================================== signatures -->
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="sig-head reveal">
+        <div>
+          <p class="num">03</p>
+          <h2 class="display display--lg" style="margin:.7rem 0 0">Signatures</h2>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:2rem;flex-wrap:wrap">
+          <p class="lede" style="max-width:34ch;margin:0">
+            Five things we would put our name to. Add any of them straight to
+            your order.
+          </p>
+          <div class="sig-nav">
+            <button class="round-btn" type="button" data-sig-prev aria-label="Previous signatures">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="round-btn" type="button" data-sig-next aria-label="More signatures">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="sig-rail" id="sigRail" role="list" aria-label="Signature dishes"></div>
+    </div>
+  </section>
+
+  <!-- ================================================ gelato creations -->
+  <section class="section" id="builder">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center">
+        <p class="num">04</p>
+        <h2 class="display display--lg" style="margin:.8rem 0 1.2rem">Build Your Gelato</h2>
+        <p class="lede" style="margin-inline:auto">
+          Three ways to have it. Pick one and it goes straight onto your order.
+        </p>
+      </div>
+
+      <div class="fries">
+        <div class="fries__media">
+          <video src="assets/video/dessert.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <span class="fries__badge">Churned this morning</span>
+        </div>
+
+        <div>
+          <fieldset class="picker" id="builderPicker">
+            <legend>Choose your creation</legend>
+
+            <label class="option">
+              <input type="radio" name="builder" value="gelato-croissant" checked
+                     data-toppings="scoop,croissant,pistachio,drizzle">
+              <span class="option__box">
+                <span class="option__name">Gelato &#215; Croissant</span>
+                <span class="option__price">&#8377;340</span>
+                <span class="option__note">Warm croissant split and filled with a scoop.</span>
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="builder" value="affogato" data-toppings="scoop,espresso">
+              <span class="option__box">
+                <span class="option__name">Affogato</span>
+                <span class="option__price">&#8377;300</span>
+                <span class="option__note">Madagascar vanilla, drowned in a double shot.</span>
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="builder" value="gelato-cookie" data-toppings="scoop,cookie,drizzle">
+              <span class="option__box">
+                <span class="option__name">Gelato &#215; Cookie</span>
+                <span class="option__price">&#8377;320</span>
+                <span class="option__note">A scoop pressed between two warm cookies.</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <ul class="loadout" aria-label="What goes into it">
+            <li data-topping="scoop">One scoop</li>
+            <li data-topping="croissant">Warm croissant</li>
+            <li data-topping="cookie">Warm cookies</li>
+            <li data-topping="espresso">Double espresso</li>
+            <li data-topping="pistachio">Pistachio crumb</li>
+            <li data-topping="drizzle">Pascati drizzle</li>
+          </ul>
+
+          <div class="fries__cta">
+            <span class="fries__total" id="builderTotal">&#8377;340</span>
+            <button class="btn btn--accent btn--lg" type="button" id="builderAdd" data-id="gelato-croissant">
+              Add to order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= reviews -->
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="sig-head reveal">
+        <div>
+          <p class="num">05</p>
+          <h2 class="display display--lg" style="margin:.7rem 0 0">From The Grid</h2>
+        </div>
+        <p class="lede" style="max-width:34ch;margin:0">
+          What people have been posting. Tag us and you might end up here.
+        </p>
+      </div>
+
+      <div class="ig-rail" id="igRail"></div>
+    </div>
+  </section>
+
+  <!-- ================================================= scroll film 02 -->
+  <section class="film" data-film style="height:260vh">
+    <div class="film__pin">
+      <video class="film__video" src="assets/video/living-menu-1.mp4" muted playsinline preload="auto"></video>
+
+      <div class="film__copy">
+        <p class="label label--light">Thursday &amp; Friday, 6 – 9pm</p>
+        <h2 class="display display--lg" style="margin:1.2rem 0 1.4rem">The Tasting<br>Counter</h2>
+        <p class="lede" style="max-width:46ch">
+          Twelve courses in miniature, one or two bites each, plated to order.
+          Twelve seats, walk in only.
+        </p>
+      </div>
+
+      <div class="film__progress"><span data-film-progress></span></div>
+    </div>
+  </section>
+
+  <!-- ==================================================== framed menu -->
+  <section class="section">
+    <div class="wrap wrap--wide">
+      <div class="frame reveal">
+        <span class="frame__corner frame__corner--tl">Est. 2019</span>
+        <span class="frame__corner frame__corner--tr">Bandra West</span>
+        <span class="frame__corner frame__corner--br">All prices in &#8377;</span>
+
+        <div class="frame__head">
+          <p class="label">The menu</p>
+          <h2 class="display display--lg">Everything<br>We Make</h2>
+          <p class="lede">Tap through to the full list, or jump straight into a section.</p>
+        </div>
+
+        <div class="teaser" id="menuTeaser"></div>
+
+        <div style="display:flex;justify-content:center;margin-top:clamp(2rem,4vw,3rem)">
+          <a class="orb" href="menu.html">See full<br>Menu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= closing -->
+  <section class="section section--dark">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__media">
+          <div class="plate-wrap plate-wrap--soft">
+            <div class="plate">
+              <video src="assets/video/living-menu-2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+        </div>
+        <div class="split__body">
+          <p class="label label--light">Come in</p>
+          <h2 class="display display--lg" style="margin:.8rem 0 1.4rem">The Corner<br>With The Green Door</h2>
+          <p class="lede">
+            No reservations, no queue system, no app to download. Walk in, find a
+            seat, and order whenever you are ready.
+          </p>
+          <div class="hero__actions" style="margin-top:2rem">
+            <a class="btn btn--accent" href="contact.html">Find us</a>
+            <a class="btn btn--ghost" href="menu.html">Back to the menu</a>
+          </div>
+        </div>
+        <div class="split__aside">
+          <a class="orb" href="contact.html">Get in<br>Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Coco<span>&nbsp;Vito</span></div>
+        <p style="max-width:34ch;font-size:.9rem">
+          A café, a gelato bar and a kitchen that does not close in the afternoon.
+        </p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon – Thu · 8am – 11pm</li>
+          <li>Fri – Sat · 8am – 1am</li>
+          <li>Sunday · 9am – 11pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Coco Vito. All rights reserved.</span>
+      <span>Bandra West, Mumbai</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================================================== order chrome -->
+
+<div class="order-bar" id="orderBar">
+  <span class="order-bar__text"><b data-order-items>0 items</b> · <b data-order-total>₹0</b></span>
+  <button class="btn btn--accent" type="button" data-open-order>View order</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Your order">
+  <div class="drawer__head">
+    <h2>Your order</h2>
+    <button class="icon-btn" id="drawerClose" type="button" data-close-order aria-label="Close order">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <div class="totals">
+      <span class="totals__label" data-order-items>0 items</span>
+      <span class="totals__value" data-order-total>₹0</span>
+    </div>
+    <button class="btn btn--accent btn--block btn--lg" type="button" data-show-counter>Show at counter</button>
+    <button class="link-btn" type="button" data-clear>Clear this order</button>
+  </div>
+</aside>
+
+<section class="counter" id="counter" aria-hidden="true" aria-label="Order for the counter">
+  <div class="counter__head">
+    <div class="counter__brand">Coco Vito</div>
+    <div class="counter__code" id="counterCode">—</div>
+    <p class="counter__hint" id="counterHint"></p>
+  </div>
+  <div class="counter__body" id="counterBody"></div>
+  <div class="counter__foot">
+    <div class="counter__total">
+      <span>Total to pay</span>
+      <b id="counterTotalValue">₹0</b>
+    </div>
+    <div class="counter__actions">
+      <button class="btn btn--ghost" type="button" id="counterCopy">Copy</button>
+      <button class="btn" type="button" id="counterClose" data-close-counter>Done</button>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/icons.js?v=24"></script>
+<script src="assets/js/menu-data.js?v=24"></script>
+<script src="assets/js/app.js?v=24"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

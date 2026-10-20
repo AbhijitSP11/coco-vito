@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu — Coco Vito</title>
+<meta name="description" content="The full Coco Vito menu. Tap to build your order, then show the screen at the counter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=24">
+<link rel="stylesheet" href="assets/css/editorial.css?v=24">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Coco<span>&nbsp;Vito</span></a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="menu.html" aria-current="page">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="order-pill" type="button" data-open-order>
+        My order
+        <span class="order-pill__count" data-order-count hidden>0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="page-hero__media">
+      <video src="assets/video/living-menu-1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+    <div class="wrap">
+      <p class="label label--light">The menu</p>
+      <h1 class="display display--xl" style="margin-top:1.2rem">Build<br>Your Order</h1>
+      <p class="hero__sub" style="margin-top:1.8rem">
+        Tap the plus beside anything you want. When you are done, hit
+        <b>Show at counter</b> and hand your phone across — we will read it off the screen.
+      </p>
+      <div class="hero__actions" style="margin-top:2rem">
+        <button class="btn btn--accent" type="button" data-open-order>View my order</button>
+        <a class="btn btn--ghost" href="#espresso">Jump to the menu</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="wrap wrap--wide">
+      <div class="frame">
+        <span class="frame__corner frame__corner--tl">Coco Vito</span>
+        <span class="frame__corner frame__corner--tr">Est. 2019</span>
+        <span class="frame__corner frame__corner--br">All prices in &#8377;, taxes included</span>
+
+        <div class="frame__head">
+          <p class="label">Everything we make</p>
+          <h2 class="display display--lg">Everything<br>We Make</h2>
+          <p class="lede" style="margin:1.1rem auto 0">Everything on this menu is vegetarian.</p>
+          <div class="filters" id="menuFilters" style="justify-content:center;margin-top:1.8rem"></div>
+        </div>
+
+        <div id="menuGroups"></div>
+
+        <hr class="rule" style="margin:clamp(2rem,4vw,3rem) 0 1.4rem">
+        <p class="form__note" style="text-align:center">
+          Ask us about allergens — we know what is in everything.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="wrap">
+      <div class="feature reveal">
+        <div class="feature__media">
+          <video src="assets/video/food.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+        <div>
+          <p class="eyebrow">How ordering works</p>
+          <h2>No app, no QR code, no waiting for a waiter.</h2>
+          <p class="lede">
+            Your order saves on this device, so you can lock your phone on the walk over
+            and it will still be here. At the counter, tap <b>Show at counter</b> — you get
+            a short code and a clean list we can read at a glance.
+          </p>
+          <ul class="feature__list">
+            <li>Nothing is sent anywhere until you order in person</li>
+            <li>Pay at the counter, card or UPI</li>
+            <li>Add a note if you want something changed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Coco<span>&nbsp;Vito</span></div>
+        <p style="max-width:34ch;font-size:.9rem">
+          A café, a gelato bar and a kitchen that does not close in the afternoon.
+        </p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon – Thu · 8am – 11pm</li>
+          <li>Fri – Sat · 8am – 1am</li>
+          <li>Sunday · 9am – 11pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Coco Vito. All rights reserved.</span>
+      <span>Bandra West, Mumbai</span>
+    </div>
+  </div>
+</footer>
+
+<div class="order-bar" id="orderBar">
+  <span class="order-bar__text"><b data-order-items>0 items</b> · <b data-order-total>₹0</b></span>
+  <button class="btn btn--accent" type="button" data-open-order>View order</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Your order">
+  <div class="drawer__head">
+    <h2>Your order</h2>
+    <button class="icon-btn" id="drawerClose" type="button" data-close-order aria-label="Close order">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+  <div class="drawer__foot">
+    <div class="totals">
+      <span class="totals__label" data-order-items>0 items</span>
+      <span class="totals__value" data-order-total>₹0</span>
+    </div>
+    <button class="btn btn--accent btn--block btn--lg" type="button" data-show-counter>Show at counter</button>
+    <button class="link-btn" type="button" data-clear>Clear this order</button>
+  </div>
+</aside>
+
+<section class="counter" id="counter" aria-hidden="true" aria-label="Order for the counter">
+  <div class="counter__head">
+    <div class="counter__brand">Coco Vito</div>
+    <div class="counter__code" id="counterCode">—</div>
+    <p class="counter__hint" id="counterHint"></p>
+  </div>
+  <div class="counter__body" id="counterBody"></div>
+  <div class="counter__foot">
+    <div class="counter__total">
+      <span>Total to pay</span>
+      <b id="counterTotalValue">₹0</b>
+    </div>
+    <div class="counter__actions">
+      <button class="btn btn--ghost" type="button" id="counterCopy">Copy</button>
+      <button class="btn" type="button" id="counterClose" data-close-counter>Done</button>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/icons.js?v=24"></script>
+<script src="assets/js/menu-data.js?v=24"></script>
+<script src="assets/js/app.js?v=24"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
